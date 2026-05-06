@@ -1,0 +1,876 @@
+@import "tailwindcss";
+
+* {
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+/* ===================== KEYFRAMES ===================== */
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    70% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes waveBar {
+
+    0%,
+    100% {
+        height: 10px;
+    }
+
+    50% {
+        height: 45px;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes particleDrift {
+    0% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.15;
+    }
+
+    25% {
+        transform: translateY(-30px) translateX(15px);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-60px) translateX(-10px);
+        opacity: 0.25;
+    }
+
+    75% {
+        transform: translateY(-30px) translateX(20px);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.15;
+    }
+}
+
+@keyframes borderGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 6px #3b82f6, 0 0 12px #3b82f6;
+    }
+
+    50% {
+        box-shadow: 0 0 18px #6366f1, 0 0 35px #6366f1;
+    }
+}
+
+@keyframes rotateBlob {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes orbPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 0 20px rgba(99, 102, 241, 0);
+    }
+}
+
+/* ===================== UTILITIES ===================== */
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-fade-up {
+    animation: fadeSlideUp 0.6s ease forwards;
+}
+
+.animate-orb-pulse {
+    animation: orbPulse 2s ease-in-out infinite;
+}
+
+.animate-rotate-blob {
+    animation: rotateBlob 8s linear infinite;
+}
+
+.pulse-ring {
+    position: absolute;
+    border-radius: 50%;
+    animation: pulseRing 2s ease-out infinite;
+}
+
+.wave-bar {
+    width: 6px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #818cf8, #6366f1);
+    animation: waveBar 0.8s ease-in-out infinite;
+}
+
+.shimmer-btn {
+    background: linear-gradient(90deg, #ffffff 25%, #d1d5f0 50%, #ffffff 75%);
+    background-size: 200% auto;
+    transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shimmer-btn:hover {
+    background-position: right center;
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.45);
+}
+
+.input-glow:focus {
+    animation: borderGlow 1.5s ease-in-out infinite;
+    outline: none;
+    border-color: #6366f1 !important;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #818cf8, transparent);
+    pointer-events: none;
+    animation: particleDrift linear infinite;
+}
+
+.glass-card {
+    background: rgba(2, 2, 30, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.neon-text {
+    text-shadow: 0 0 10px rgba(129, 140, 248, 0.8), 0 0 30px rgba(99, 102, 241, 0.5);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020220;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3730a3;
+    border-radius: 4px;
+}
+
+/* ===================== EXTRAS ===================== */
+
+/* 1. Typing cursor blink */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.cursor-blink::after {
+    content: '|';
+    color: #818cf8;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+/* 2. Avatar neon glow pulse */
+@keyframes avatarGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 60px rgba(67, 56, 202, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 45px rgba(129, 140, 248, 0.75), 0 0 90px rgba(99, 102, 241, 0.45);
+    }
+}
+
+.avatar-glow {
+    animation: avatarGlow 3s ease-in-out infinite;
+}
+
+/* 3. Animated gradient text */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient-text {
+    background: linear-gradient(270deg, #818cf8, #c084fc, #38bdf8, #818cf8);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease infinite;
+}
+
+/* 4. Button ripple on click */
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.45) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.shimmer-btn:active::after {
+    opacity: 1;
+    transform: scale(2.5);
+    transition: 0s;
+}
+
+/* 5. Page entrance fade-in */
+#root {
+    animation: fadeSlideUp 0.5s ease forwards;
+}
+
+/* ===================== TOAST ===================== */
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(60px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(60px) scale(0.95);
+    }
+}
+
+@keyframes toastBar {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+    }
+}
+
+/* ===================== TYPEWRITER ===================== */
+@keyframes caretBlink {
+
+    0%,
+    100% {
+        border-right-color: #818cf8;
+    }
+
+    50% {
+        border-right-color: transparent;
+    }
+}
+
+.typewriter-text {
+    display: inline;
+    border-right: 2px solid #818cf8;
+    animation: caretBlink 0.8s step-end infinite;
+    padding-right: 2px;
+}
+
+/* ===================== MIC VISUALIZER ===================== */
+.mic-bar {
+    width: 4px;
+    border-radius: 3px;
+    background: linear-gradient(to top, #6366f1, #818cf8);
+    transition: height 0.08s ease;
+    min-height: 4px;
+}
+
+/* ===================== SHORTCUT CHIPS ===================== */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #c7d2fe;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.chip:hover {
+    background: rgba(99, 102, 241, 0.28);
+    border-color: rgba(129, 140, 248, 0.6);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+}
+
+.chip:active {
+    transform: translateY(0);
+}
+
+/* Counting-down chip state */
+.chip-counting {
+    background: rgba(99, 102, 241, 0.25) !important;
+    border-color: rgba(129, 140, 248, 0.7) !important;
+    color: white !important;
+    transform: scale(1.06) !important;
+    box-shadow: 0 0 18px rgba(99, 102, 241, 0.4) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* The sweep-fill countdown bar inside the chip */
+@keyframes chipCountdownFill {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.chip-countdown-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(129, 140, 248, 0.25);
+    border-radius: 50px;
+    animation: chipCountdownFill linear forwards;
+    pointer-events: none;
+}
+
+/* Cancel X button inside chip */
+.chip-cancel {
+    margin-left: 4px;
+    font-size: 11px;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+}
+
+.chip-cancel:hover {
+    opacity: 1;
+}
+
+/* ===================== TEXT INPUT BAR ===================== */
+.text-input-bar {
+    background: rgba(2, 2, 30, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 50px;
+    padding: 10px 16px;
+    color: #e0e7ff;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+}
+
+.text-input-bar::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+.text-input-bar:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.25), 0 0 6px rgba(99, 102, 241, 0.3);
+}
+
+/* ===================== NOW PLAYING WIDGET ===================== */
+@keyframes slideUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.now-playing-card {
+    animation: slideUpIn 0.4s ease forwards;
+    background: rgba(2, 2, 30, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+/* ===================== MORNING BRIEFING ===================== */
+@keyframes briefingFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.briefing-card {
+    animation: briefingFadeIn 0.5s ease forwards;
+    background: linear-gradient(135deg, rgba(13, 13, 58, 0.95), rgba(67, 56, 202, 0.3));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(129, 140, 248, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 40px rgba(99, 102, 241, 0.2);
+}
+
+/* ===================== PIN CHIP BUTTON ===================== */
+.chip-pin-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px dashed rgba(99, 102, 241, 0.4);
+    color: #818cf8;
+    transition: all 0.2s ease;
+}
+
+.chip-pin-add:hover {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: #818cf8;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
+}
+
+.chip-unpin {
+    font-size: 10px;
+    margin-left: 3px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    color: #f87171;
+    cursor: pointer;
+}
+
+.chip:hover .chip-unpin {
+    opacity: 0.7;
+}
+
+.chip-unpin:hover {
+    opacity: 1 !important;
+}
+
+/* ===================== ADD CHIP MODAL ===================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: briefingFadeIn 0.25s ease;
+}
+
+.modal-card {
+    background: rgba(13, 13, 58, 0.97);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 20px;
+    padding: 28px;
+    min-width: 320px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* ===================== MOOD THEME TRANSITION ===================== */
+.mood-transition {
+    transition: background 1.5s ease;
+}
+
+/* ===================== TIMER WIDGET ===================== */
+@keyframes timerRing {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: 283;
+    }
+}
+
+.timer-card {
+    animation: slideUpIn 0.4s ease forwards;
+    background: rgba(2, 2, 30, 0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 24px rgba(99, 102, 241, 0.15);
+}
+
+/* ===================== TODO PANEL ===================== */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.todo-panel {
+    animation: slideInLeft 0.35s ease forwards;
+    background: rgba(2, 2, 30, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.1);
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(99, 102, 241, 0.07);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    transition: all 0.2s;
+}
+
+.todo-item:hover {
+    background: rgba(99, 102, 241, 0.15);
+}
+
+.todo-item.done {
+    opacity: 0.45;
+}
+
+.todo-item.done span {
+    text-decoration: line-through;
+}
+
+/* ===================== BREATHING AVATAR ===================== */
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ringPulseThinking {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    25% { transform: scale(1.08) rotate(90deg); opacity: 1; }
+    50% { transform: scale(0.98) rotate(180deg); opacity: 0.8; }
+    75% { transform: scale(1.05) rotate(270deg); opacity: 1; }
+}
+
+.avatar-breathing-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 26px;
+    padding: 3px;
+    background: conic-gradient(
+        from 0deg,
+        rgba(99, 102, 241, 0.6),
+        rgba(129, 140, 248, 0.1),
+        rgba(168, 85, 247, 0.5),
+        rgba(99, 102, 241, 0.1),
+        rgba(129, 140, 248, 0.6)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: breathe 4s ease-in-out infinite, ringRotate 8s linear infinite;
+    pointer-events: none;
+}
+
+/* Thinking: faster spin + pulse */
+.avatar-breathing-ring.thinking {
+    animation: ringPulseThinking 1.2s ease-in-out infinite;
+    background: conic-gradient(
+        from 0deg,
+        rgba(250, 204, 21, 0.7),
+        rgba(99, 102, 241, 0.2),
+        rgba(168, 85, 247, 0.6),
+        rgba(250, 204, 21, 0.2),
+        rgba(99, 102, 241, 0.7)
+    );
+}
+
+/* Speaking: rhythmic pulse */
+.avatar-breathing-ring.speaking {
+    animation: breathe 0.8s ease-in-out infinite, ringRotate 3s linear infinite;
+    background: conic-gradient(
+        from 0deg,
+        rgba(34, 197, 94, 0.6),
+        rgba(99, 102, 241, 0.15),
+        rgba(34, 197, 94, 0.5),
+        rgba(129, 140, 248, 0.15),
+        rgba(34, 197, 94, 0.6)
+    );
+}
+
+.avatar-breathing-shadow {
+    position: absolute;
+    inset: -16px;
+    border-radius: 30px;
+    background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%);
+    animation: breathe 4s ease-in-out infinite;
+    pointer-events: none;
+    filter: blur(8px);
+}
+
+.avatar-breathing-shadow.thinking {
+    background: radial-gradient(circle, rgba(250,204,21,0.25) 0%, transparent 70%);
+    animation: breathe 1.2s ease-in-out infinite;
+}
+
+.avatar-breathing-shadow.speaking {
+    background: radial-gradient(circle, rgba(34,197,94,0.2) 0%, transparent 70%);
+    animation: breathe 0.8s ease-in-out infinite;
+}
+
+/* ===================== COMMAND PALETTE ===================== */
+@keyframes paletteIn {
+    from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes paletteBackdropIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.cmd-palette-backdrop {
+    animation: paletteBackdropIn 0.2s ease forwards;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.cmd-palette-modal {
+    animation: paletteIn 0.25s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+    background: rgba(8, 8, 40, 0.96);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(99, 102, 241, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.cmd-palette-input {
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 14px;
+    color: white;
+    font-size: 16px;
+    padding: 14px 18px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.cmd-palette-input:focus {
+    border-color: rgba(129, 140, 248, 0.6);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+.cmd-palette-input::placeholder {
+    color: rgba(148, 163, 184, 0.6);
+}
+
+.cmd-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+}
+
+.cmd-item:hover, .cmd-item.active {
+    background: rgba(99, 102, 241, 0.12);
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+.cmd-item .cmd-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.cmd-item .cmd-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.cmd-item .cmd-hint {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+/* ===================== STOP SPEAKING BUTTON ===================== */
+@keyframes stopPulse {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.4), 0 0 0 0 rgba(239, 68, 68, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 18px rgba(239, 68, 68, 0.7), 0 0 0 6px rgba(239, 68, 68, 0);
+    }
+}
+
+.stop-speaking-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    animation: stopPulse 1.2s ease-in-out infinite;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.stop-speaking-btn:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: white;
+    transform: scale(1.05);
+}
+
+.stop-speaking-btn:active {
+    transform: scale(0.97);
+}
+
+.stop-icon {
+    font-size: 11px;
+}
+
+/* Pulsing red glow for the stop button in the input bar */
+.stop-btn-pulse {
+    animation: stopPulse 1.2s ease-in-out infinite;
+}
